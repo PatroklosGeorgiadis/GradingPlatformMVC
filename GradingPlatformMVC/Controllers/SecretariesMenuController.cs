@@ -2,7 +2,7 @@
 
 namespace GradingPlatformMVC.Controllers
 {
-    public class SecretaryMenuController : Controller
+    public class SecretariesMenuController : Controller
     {
         public IActionResult Index()
         {

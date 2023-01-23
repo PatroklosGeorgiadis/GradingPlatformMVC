@@ -38,7 +38,7 @@ public partial class GradeDBContext : DbContext
             entity.Property(e => e.IdCourse).ValueGeneratedNever();
 
             entity.HasOne(d => d.ProfessorsAfmNavigation).WithMany(p => p.Courses)
-                .HasPrincipalKey(p => p.Afm)
+                .HasForeignKey(p => p.ProfessorsAfm)
                 .HasConstraintName("FK__courses__profess__5629CD9C");
         });
 

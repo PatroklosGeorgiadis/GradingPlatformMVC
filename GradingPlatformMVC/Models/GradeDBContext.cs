@@ -51,7 +51,7 @@ public partial class GradeDBContext : DbContext
                 .HasConstraintName("FK__course_ha__idCou__59063A47");
 
             entity.HasOne(d => d.RegistrationNumNavigation).WithMany(p => p.CourseHasStudents)
-                .HasPrincipalKey(p => p.RegistrationNum)
+                .HasForeignKey(p => p.RegistrationNum)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__course_ha__regis__59FA5E80");
         });

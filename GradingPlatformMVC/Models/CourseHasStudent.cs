@@ -26,6 +26,7 @@ public partial class CourseHasStudent
     [ForeignKey("IdCourse")]
     [InverseProperty("CourseHasStudents")]
     public virtual Course IdCourseNavigation { get; set; } = null!;
-
+    [ForeignKey("RegistrationNum")]
+    [InverseProperty("CourseHasStudents")]
     public virtual Student RegistrationNumNavigation { get; set; } = null!;
 }

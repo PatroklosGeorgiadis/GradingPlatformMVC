@@ -40,6 +40,6 @@ public partial class Professor
     [StringLength(50)]
     [Unicode(false)]
     public string? Department { get; set; }
-
+    [InverseProperty("ProfessorsAfmNavigation")]
     public virtual ICollection<Course> Courses { get; } = new List<Course>();
 }

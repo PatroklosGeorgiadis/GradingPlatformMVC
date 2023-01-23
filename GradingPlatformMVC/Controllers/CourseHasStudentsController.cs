@@ -70,7 +70,7 @@ namespace GradingPlatformMVC.Controllers
         public IActionResult Create()
         {
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username");
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
             return View();
         }
 
@@ -88,7 +88,7 @@ namespace GradingPlatformMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username", courseHasStudent.RegistrationNum);
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
             return View(courseHasStudent);
         }
 
@@ -106,7 +106,7 @@ namespace GradingPlatformMVC.Controllers
                 return NotFound();
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username", courseHasStudent.RegistrationNum);
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
             return View(courseHasStudent);
         }
 
@@ -143,7 +143,7 @@ namespace GradingPlatformMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username", courseHasStudent.RegistrationNum);
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
             return View(courseHasStudent);
         }
 

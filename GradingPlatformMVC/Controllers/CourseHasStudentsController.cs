@@ -23,8 +23,7 @@ namespace GradingPlatformMVC.Controllers
         // GET: CourseHasStudents
         public IActionResult Index(int? page)
         {
-            var grades = from e in _context.CourseHasStudents
-                            select e;
+            var grades = _context.CourseHasStudents;
 
             // Pagination
             if (page != null && page < 1)

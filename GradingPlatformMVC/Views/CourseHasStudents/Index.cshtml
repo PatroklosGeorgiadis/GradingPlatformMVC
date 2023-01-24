@@ -6,7 +6,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Student Grades</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -40,8 +40,6 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Delete</a>
             </td>
         </tr>
 }

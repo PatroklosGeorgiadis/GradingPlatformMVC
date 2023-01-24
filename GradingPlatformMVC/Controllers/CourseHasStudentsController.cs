@@ -23,8 +23,7 @@ namespace GradingPlatformMVC.Controllers
         // GET: CourseHasStudents
         public IActionResult Index(int? page, string? search, string sortOrder)
         {
-            var grades = from e in _context.CourseHasStudents.Include(e => e.RegistrationNumNavigation)
-                         .Include(e => e.IdCourseNavigation)
+            var grades = from e in _context.CourseHasStudents
                             select e;
 
             //Search
@@ -42,7 +41,8 @@ namespace GradingPlatformMVC.Controllers
             int PageSize = 10;
 
             ViewData["Page"] = page;
-            var gradesData = grades.ToPagedList(page ?? 1, PageSize);
+            var gradesData = grades.Include(e => e.RegistrationNumNavigation)
+                         .Include(e => e.IdCourseNavigation).ToPagedList(page ?? 1, PageSize);
 
             return View(gradesData);
         }

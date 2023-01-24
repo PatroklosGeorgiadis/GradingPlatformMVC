@@ -40,6 +40,6 @@ public partial class Student
     [StringLength(50)]
     [Unicode(false)]
     public string? Department { get; set; }
-
+    [InverseProperty("RegistrationNumNavigation")]
     public virtual ICollection<CourseHasStudent> CourseHasStudents { get; } = new List<CourseHasStudent>();
 }

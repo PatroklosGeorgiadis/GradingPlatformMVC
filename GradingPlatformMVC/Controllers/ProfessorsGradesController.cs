@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GradingPlatformMVC.Models;
+using X.PagedList;
 
 namespace GradingPlatformMVC.Controllers
 {
@@ -19,10 +20,20 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsGrades
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int? page)
         {
-            var gradeDBContext = _context.CourseHasStudents.Include(c => c.IdCourseNavigation).Include(c => c.RegistrationNumNavigation);
-            return View(await gradeDBContext.ToListAsync());
+            var grades = _context.CourseHasStudents;
+
+            // Pagination
+            if (page != null && page < 1)
+            {
+                page = 1;
+            }
+
+            int PageSize = 10;
+            var gradesData = grades.Include(e => e.IdCourseNavigation).ToPagedList(page ?? 1, PageSize);
+
+            return View(gradesData);
         }
 
         // GET: ProfessorsGrades/Details/5

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GradingPlatformMVC.Models;
+using X.PagedList;
 
 namespace GradingPlatformMVC.Controllers
 {
@@ -19,10 +20,62 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: StudentsGrades
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int? page, string? search, string sortOrder)
         {
-            var gradeDBContext = _context.CourseHasStudents.Include(c => c.IdCourseNavigation).Include(c => c.RegistrationNumNavigation);
-            return View(await gradeDBContext.ToListAsync());
+            /*ViewData["CurrentSortOrder"] = sortOrder;
+            ViewData["CourseTitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CourseSemesterSortParm"] = sortOrder == "dept" ? "dept_desc" : "dept";
+            ViewData["RegistrationNumParm"] = sortOrder == "salary" ? "salary_desc" : "salary";*/
+
+            ViewData["CurrentFilter"] = search;
+
+            var grades = from e in _context.CourseHasStudents
+                            select e;
+
+            //Search
+            if (!String.IsNullOrEmpty(search))
+            {
+                grades = grades.Where(e => e.RegistrationNum.Contains(search));
+            }
+
+            //SortOrder
+            /*switch (sortOrder)
+            {
+
+                case "name_desc":
+                    grades = grades.OrderByDescending(e => e.LastName);
+                    break;
+
+                case "dept":
+                    grades = grades.OrderBy(e => e.Dept.DeptName);
+                    break;
+
+                case "dept_desc":
+                    grades = grades.OrderByDescending(e => e.Dept.DeptName);
+                    break;
+
+                case "salary":
+                    grades = grades.OrderBy(e => e.Salary);
+                    break;
+
+                case "salary_desc":
+                    grades = grades.OrderByDescending(e => e.Salary);
+                    break;
+                default:
+                    grades = grades.OrderBy(e => e.LastName);
+                    break;
+            }*/
+
+            // Pagination
+            if (page != null && page < 1)
+            {
+                page = 1;
+            }
+
+            int PageSize = 10;
+            var gradesData = grades.Include(e => e.IdCourseNavigation).ToPagedList(page ?? 1, PageSize);
+
+            return View(gradesData);
         }
 
         // GET: StudentsGrades/Details/5

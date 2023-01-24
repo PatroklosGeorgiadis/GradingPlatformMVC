@@ -1,47 +1,73 @@
-﻿@model IEnumerable<GradingPlatformMVC.Models.CourseHasStudent>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model X.PagedList.IPagedList<GradingPlatformMVC.Models.CourseHasStudent>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Course Results</h1>
 
-<p>
+<!--<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>-->
+<form asp-action="Index" method="get">
+    <div class="form-actions">
+        <p>
+            Find by Registration Number: <input type="text" name="search" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="search" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Grade)
+                <a asp-action="Index" asp-route-page="@ViewData["Page"]" asp-route-sortOrder="@ViewData["CourseTitleSortParm"]" asp-route-search="@ViewData["CurrentFilter"]">Course Title</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCourse)
+                <a asp-action="Index" asp-route-page="@ViewData["Page"]" asp-route-sortOrder="@ViewData["CourseSemesterSortParm"]" asp-route-search="@ViewData["CurrentFilter"]">Course Semester</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegistrationNum)
+                <a asp-action="Index" asp-route-page="@ViewData["Page"]" asp-route-sortOrder="@ViewData["RegistrationNumSortParm"]" asp-route-search="@ViewData["CurrentFilter"]">Registration Number</a>
             </th>
-            <th></th>
+            <th>
+                Grade
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Grade)
+                @Html.DisplayFor(modelItem => item.IdCourseNavigation.CourseTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCourse)
+                @Html.DisplayFor(modelItem => item.IdCourseNavigation.CourseSemester)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegistrationNum)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Grade)
             </td>
         </tr>
 }
     </tbody>
 </table>
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+<nav>
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
+    {
+    ActiveLiElementClass = "active",
+    PageClasses = new[]{ "page-link"},
+    LiElementClasses=new[] { "page-item" },
+    UlElementClasses = new[] { "pagination","justify-content-center", "mt-3" },
+    LinkToNextPageFormat = "Next",
+    LinkToPreviousPageFormat = "Previous",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+    })
+</nav>

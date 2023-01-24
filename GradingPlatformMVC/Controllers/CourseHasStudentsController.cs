@@ -24,6 +24,7 @@ namespace GradingPlatformMVC.Controllers
         public IActionResult Index(int? page, string? search, string sortOrder)
         {
             var grades = from e in _context.CourseHasStudents.Include(e => e.RegistrationNumNavigation)
+                         .Include(e => e.IdCourseNavigation)
                             select e;
 
             //Search

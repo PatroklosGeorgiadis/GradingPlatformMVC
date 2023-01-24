@@ -21,16 +21,10 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: CourseHasStudents
-        public IActionResult Index(int? page, string? search, string sortOrder)
+        public IActionResult Index(int? page)
         {
             var grades = from e in _context.CourseHasStudents
                             select e;
-
-            //Search
-            if (!String.IsNullOrEmpty(search))
-            {
-                grades = grades.Where(e => e.RegistrationNum.Contains(search));
-            }
 
             // Pagination
             if (page != null && page < 1)

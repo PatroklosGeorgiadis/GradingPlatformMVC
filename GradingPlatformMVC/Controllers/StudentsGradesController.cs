@@ -22,10 +22,10 @@ namespace GradingPlatformMVC.Controllers
         // GET: StudentsGrades
         public IActionResult Index(int? page, string? search, string sortOrder)
         {
-            /*ViewData["CurrentSortOrder"] = sortOrder;
-            ViewData["CourseTitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["CourseSemesterSortParm"] = sortOrder == "dept" ? "dept_desc" : "dept";
-            ViewData["RegistrationNumParm"] = sortOrder == "salary" ? "salary_desc" : "salary";*/
+            ViewData["CurrentSortOrder"] = sortOrder;
+            ViewData["CourseTitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["CourseSemesterSortParm"] = sortOrder == "semester" ? "semester_desc" : "semester";
+            ViewData["RegistrationNumParm"] = sortOrder == "regnum" ? "regnum_desc" : "regnum";
 
             ViewData["CurrentFilter"] = search;
 
@@ -39,32 +39,32 @@ namespace GradingPlatformMVC.Controllers
             }
 
             //SortOrder
-            /*switch (sortOrder)
+            switch (sortOrder)
             {
 
-                case "name_desc":
-                    grades = grades.OrderByDescending(e => e.LastName);
+                case "title_desc":
+                    grades = grades.OrderByDescending(e => e.IdCourseNavigation.CourseTitle);
                     break;
 
-                case "dept":
-                    grades = grades.OrderBy(e => e.Dept.DeptName);
+                case "semester":
+                    grades = grades.OrderBy(e => e.IdCourseNavigation.CourseSemester);
                     break;
 
-                case "dept_desc":
-                    grades = grades.OrderByDescending(e => e.Dept.DeptName);
+                case "semester_desc":
+                    grades = grades.OrderByDescending(e => e.IdCourseNavigation.CourseSemester);
                     break;
 
-                case "salary":
-                    grades = grades.OrderBy(e => e.Salary);
+                case "regnum":
+                    grades = grades.OrderBy(e => e.RegistrationNum);
                     break;
 
-                case "salary_desc":
-                    grades = grades.OrderByDescending(e => e.Salary);
+                case "regnum_desc":
+                    grades = grades.OrderByDescending(e => e.RegistrationNum);
                     break;
                 default:
-                    grades = grades.OrderBy(e => e.LastName);
+                    grades = grades.OrderBy(e => e.IdCourseNavigation.CourseTitle);
                     break;
-            }*/
+            }
 
             // Pagination
             if (page != null && page < 1)

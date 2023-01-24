@@ -32,8 +32,6 @@ namespace GradingPlatformMVC.Controllers
             }
 
             int PageSize = 10;
-
-            ViewData["Page"] = page;
             var gradesData = grades.Include(e => e.RegistrationNumNavigation)
                          .Include(e => e.IdCourseNavigation).ToPagedList(page ?? 1, PageSize);
 

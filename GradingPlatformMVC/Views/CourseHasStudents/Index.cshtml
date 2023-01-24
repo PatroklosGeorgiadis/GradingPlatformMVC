@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.Grade)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCourse">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCourse">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCourse">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCourse" asp-route-id2="@item.RegistrationNum">Delete</a>
             </td>
         </tr>
 }

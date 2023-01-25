@@ -64,7 +64,7 @@ namespace GradingPlatformMVC.Controllers
             {
                 _context.Add(courseHasStudent);
                 await _context.SaveChangesAsync();
-                return View("~/Views/ProfessorsCourses/Index");
+                return RedirectToAction("Create", "ProfessorsCourses");
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);

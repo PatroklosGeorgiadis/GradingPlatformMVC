@@ -26,7 +26,7 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsCourses/Details/5
-        public async Task<IActionResult> Details(string? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Courses == null)
             {
@@ -34,8 +34,8 @@ namespace GradingPlatformMVC.Controllers
             }
 
             var course = await _context.Courses
-                .Include(c => c.ProfessorsAfmNavigation).ThenInclude(c => c.Surname)
-                .FirstOrDefaultAsync(m => m.ProfessorsAfm == id);
+                .Include(c => c.CourseHasStudents).ThenInclude(c => c.IdCourse)
+                .FirstOrDefaultAsync(m => m.IdCourse == id);
             if (course == null)
             {
                 return NotFound();

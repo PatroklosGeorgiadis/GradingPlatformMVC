@@ -21,13 +21,12 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsCourses
         public async Task<IActionResult> Index()
         {
-            var gradeDBContext = _context.Courses.Include(c => c.ProfessorsAfmNavigation)
-                .ThenInclude(c => c.Surname);
+            var gradeDBContext = _context.Courses.Include(c => c.ProfessorsAfmNavigation);
             return View(await gradeDBContext.ToListAsync());
         }
 
         // GET: ProfessorsCourses/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Courses == null)
             {
@@ -36,7 +35,7 @@ namespace GradingPlatformMVC.Controllers
 
             var course = await _context.Courses
                 .Include(c => c.ProfessorsAfmNavigation).ThenInclude(c => c.Surname)
-                .FirstOrDefaultAsync(m => m.IdCourse == id);
+                .FirstOrDefaultAsync(m => m.ProfessorsAfm == id);
             if (course == null)
             {
                 return NotFound();

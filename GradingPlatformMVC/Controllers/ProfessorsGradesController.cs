@@ -22,7 +22,7 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsGrades
         public IActionResult Index()
         {
-            return View("ProfessorsCourses/Index");
+            return View("~/Views/ProfessorsCourses/Index");
         }
 
         // GET: ProfessorsGrades/Details/5
@@ -49,7 +49,7 @@ namespace GradingPlatformMVC.Controllers
         public IActionResult Create()
         {
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username");
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
             return View();
         }
 
@@ -64,11 +64,11 @@ namespace GradingPlatformMVC.Controllers
             {
                 _context.Add(courseHasStudent);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("~/Views/ProfessorsCourses/Index");
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
-            return View("ProfessorsCourses/Index");
+            return View();
         }
 
         // GET: ProfessorsGrades/Edit/5

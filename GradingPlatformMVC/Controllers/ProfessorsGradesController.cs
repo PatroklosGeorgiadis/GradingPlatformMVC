@@ -64,11 +64,11 @@ namespace GradingPlatformMVC.Controllers
             {
                 _context.Add(courseHasStudent);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "ProfessorsCourses");
+                return RedirectToAction(nameof(Index));
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
-            return View();
+            return View(courseHasStudent);
         }
 
         // GET: ProfessorsGrades/Edit/5

@@ -48,8 +48,9 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsCourses/Create
         public IActionResult Create()
         {
-            ViewData["ProfessorsAfm"] = new SelectList(_context.Professors, "Username", "Username");
-            return View();
+            ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
+            return View("ProfessorsGrades/Create");
         }
 
         // POST: ProfessorsCourses/Create
@@ -57,16 +58,17 @@ namespace GradingPlatformMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCourse,CourseTitle,CourseSemester,ProfessorsAfm")] Course course)
+        public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade")] CourseHasStudent courseHasStudent)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(courseHasStudent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProfessorsAfm"] = new SelectList(_context.Professors, "Username", "Username", course.ProfessorsAfm);
-            return View(course);
+            ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username", courseHasStudent.RegistrationNum);
+            return View(courseHasStudent);
         }
 
         // GET: ProfessorsCourses/Edit/5

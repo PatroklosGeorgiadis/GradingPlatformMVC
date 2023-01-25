@@ -20,20 +20,9 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsGrades
-        public IActionResult Index(int? page)
+        public IActionResult Index()
         {
-            var grades = _context.CourseHasStudents;
-
-            // Pagination
-            if (page != null && page < 1)
-            {
-                page = 1;
-            }
-
-            int PageSize = 10;
-            var gradesData = grades.Include(e => e.IdCourseNavigation).ToPagedList(page ?? 1, PageSize);
-
-            return View(gradesData);
+            return View("ProfessorsCourses/Index");
         }
 
         // GET: ProfessorsGrades/Details/5
@@ -78,8 +67,8 @@ namespace GradingPlatformMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
-            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "Username", courseHasStudent.RegistrationNum);
-            return View(courseHasStudent);
+            ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);
+            return View("ProfessorsCourses/Index");
         }
 
         // GET: ProfessorsGrades/Edit/5

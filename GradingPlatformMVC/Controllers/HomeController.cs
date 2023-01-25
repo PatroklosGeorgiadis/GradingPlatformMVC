@@ -21,7 +21,6 @@ namespace GradingPlatformMVC.Controllers
             return View();
         }
 
-        [HttpPost]
         public async Task<IActionResult> Index(Student model)
         {
             var student = from m in _context.Students select m;
@@ -34,14 +33,13 @@ namespace GradingPlatformMVC.Controllers
             {
                 if (student.First().Password == model.Password || professor.First().Password == model.Password || secretary.First().Password == model.Password)
                 {
-
                     return View();
                 }
-                return RedirectToAction("Login");
+                return View("Login");
             }
             else
             {
-                return RedirectToAction("Login");
+                return View("Login");
             }
         }
 

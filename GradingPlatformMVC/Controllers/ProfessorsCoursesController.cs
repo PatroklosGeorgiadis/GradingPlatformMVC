@@ -21,7 +21,8 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsCourses
         public async Task<IActionResult> Index()
         {
-            var gradeDBContext = _context.Courses.Include(c => c.ProfessorsAfmNavigation);
+            var gradeDBContext = _context.Courses.OrderBy(c => c.CourseSemester)
+                .Include(c => c.ProfessorsAfmNavigation);
             return View(await gradeDBContext.ToListAsync());
         }
 

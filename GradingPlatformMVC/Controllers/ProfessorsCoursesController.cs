@@ -46,11 +46,11 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsCourses/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
-            return RedirectToAction("Create", "ProfessorsGrades"); ;
+            return RedirectToAction("Create", "ProfessorsGrades", new { id = id});
         }
 
         // POST: ProfessorsCourses/Create

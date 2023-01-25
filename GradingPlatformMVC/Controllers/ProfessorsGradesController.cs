@@ -13,6 +13,7 @@ namespace GradingPlatformMVC.Controllers
     public class ProfessorsGradesController : Controller
     {
         private readonly GradeDBContext _context;
+        public int currentID;
 
         public ProfessorsGradesController(GradeDBContext context)
         {
@@ -22,7 +23,7 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsGrades
         public IActionResult Index()
         {
-            return View("~/Views/ProfessorsCourses/Index");
+            return RedirectToAction("Index", "ProfessorsCourses");
         }
 
         // GET: ProfessorsGrades/Details/5
@@ -46,9 +47,10 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsGrades/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
+            currentID = id;
+            ViewData["IdCourse"] = id;
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
             return View();
         }
@@ -64,7 +66,7 @@ namespace GradingPlatformMVC.Controllers
             {
                 _context.Add(courseHasStudent);
                 await _context.SaveChangesAsync();
-                return View("~/Views/ProfessorsCourses/Index");
+                return RedirectToAction("Index", "ProfessorsCourses");
             }
             ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse", courseHasStudent.IdCourse);
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum", courseHasStudent.RegistrationNum);

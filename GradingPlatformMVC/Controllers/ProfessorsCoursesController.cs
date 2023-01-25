@@ -34,7 +34,7 @@ namespace GradingPlatformMVC.Controllers
             }
 
             var course = await _context.Courses
-                .Include(c => c.CourseHasStudents).ThenInclude(c => c.IdCourse)
+                .Include(c => c.CourseHasStudents)
                 .FirstOrDefaultAsync(m => m.IdCourse == id);
             if (course == null)
             {

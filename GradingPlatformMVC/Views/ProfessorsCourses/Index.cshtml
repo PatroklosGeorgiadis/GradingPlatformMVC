@@ -34,7 +34,10 @@
                 @Html.DisplayFor(modelItem => item.ProfessorsAfmNavigation.Surname)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.IdCourse">Details</a> |
+                <form asp-action="Details" asp-route-id="@item.IdCourse">
+                    <a >Details</a>
+                    <input name="id" type="hidden" value="@item.IdCourse"/>
+                </form>|
             </td>
         </tr>
 }

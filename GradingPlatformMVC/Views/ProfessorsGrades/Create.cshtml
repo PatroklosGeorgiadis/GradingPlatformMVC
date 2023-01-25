@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 Course ID:
-                @ViewData["IdCourse"].ToString()
+                @Url.RequestContext.RouteData.Values["id"]
             </div>
             <div class="form-group">
                 <label asp-for="RegistrationNum" class="control-label"></label>

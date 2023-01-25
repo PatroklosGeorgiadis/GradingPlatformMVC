@@ -22,7 +22,7 @@ namespace GradingPlatformMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var gradeDBContext = _context.Courses.Include(c => c.ProfessorsAfmNavigation)
-                .Include(c => c.CourseHasStudents);
+                .ThenInclude(c => c.Surname);
             return View(await gradeDBContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace GradingPlatformMVC.Controllers
             }
 
             var course = await _context.Courses
-                .Include(c => c.ProfessorsAfmNavigation)
+                .Include(c => c.ProfessorsAfmNavigation).ThenInclude(c => c.Surname)
                 .FirstOrDefaultAsync(m => m.IdCourse == id);
             if (course == null)
             {

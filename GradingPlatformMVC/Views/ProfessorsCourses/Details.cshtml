@@ -25,19 +25,16 @@
             @Html.DisplayFor(model => model.CourseSemester)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProfessorsAfmNavigation)
+            @Html.DisplayNameFor(model => model.ProfessorsAfmNavigation.Surname)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProfessorsAfmNavigation.Username)
+            @Html.DisplayFor(model => model.ProfessorsAfmNavigation.Surname)
         </dd>
     </dl>
 </div>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Course Title
-            </th>
             <th>
                 Registration Number
             </th>
@@ -50,9 +47,6 @@
     <tbody>
 @foreach (var item in Model.CourseHasStudents) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCourseNavigation.CourseTitle)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegistrationNum)
             </td>

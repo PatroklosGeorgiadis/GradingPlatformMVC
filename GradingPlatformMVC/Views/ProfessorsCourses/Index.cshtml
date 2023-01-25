@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.ProfessorsAfmNavigation.Surname)
             </td>
             <td>
-                    <a asp-action="Details" asp-route-id="item.IdCourse" id="@item.IdCourse">Details</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdCourse" id="@item.IdCourse">Details</a> |
             </td>
         </tr>
 }

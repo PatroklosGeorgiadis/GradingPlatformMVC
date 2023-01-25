@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using GradingPlatformMVC.Models;
 
 namespace GradingPlatformMVC.Controllers
 {
@@ -11,9 +10,10 @@ namespace GradingPlatformMVC.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly GradeDBContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, GradeDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Login()

@@ -58,10 +58,8 @@ namespace GradingPlatformMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade")] CourseHasStudent courseHasStudent)
+        public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade,IdCourseNavigation,RegistrationNumNavigation")] CourseHasStudent courseHasStudent)
         {
-            courseHasStudent.IdCourseNavigation.IdCourse = courseHasStudent.IdCourse;
-            courseHasStudent.RegistrationNumNavigation.RegistrationNum = courseHasStudent.RegistrationNum;
             if (ModelState.IsValid)
             {
                 _context.Add(courseHasStudent);

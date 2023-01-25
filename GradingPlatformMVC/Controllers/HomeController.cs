@@ -29,9 +29,25 @@ namespace GradingPlatformMVC.Controllers
             professor = professor.Where(s => s.Username == model.Username);
             var secretary = from m in _context.Secretaries select m;
             secretary = secretary.Where(s => s.Username == model.Username);
-            if (student.Count() != 0 || professor.Count() != 0 || secretary.Count() != 0)
+            if (student.Count() != 0)
             {
-                if (student.First().Password == model.Password || professor.First().Password == model.Password || secretary.First().Password == model.Password)
+                if (student.First().Password == model.Password)
+                {
+                    return View("Index");
+                }
+                return View("Login");
+            }
+            else if (professor.Count() != 0)
+            {
+                if (professor.First().Password == model.Password)
+                {
+                    return View("Index");
+                }
+                return View("Login");
+            }
+            else if(secretary.Count() != 0)
+            {
+                if (secretary.First().Password == model.Password)
                 {
                     return View("Index");
                 }

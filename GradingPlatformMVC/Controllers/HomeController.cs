@@ -16,12 +16,12 @@ namespace GradingPlatformMVC.Controllers
             _context = context;
         }
 
-        public IActionResult Login()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> Index(Student model)
+        public async Task<IActionResult> Login(Student model)
         {
             var student = from m in _context.Students select m;
             student = student.Where(s => s.Username == model.Username);
@@ -33,7 +33,7 @@ namespace GradingPlatformMVC.Controllers
             {
                 if (student.First().Password == model.Password || professor.First().Password == model.Password || secretary.First().Password == model.Password)
                 {
-                    return View();
+                    return View("Index");
                 }
                 return View("Login");
             }

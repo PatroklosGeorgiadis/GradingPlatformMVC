@@ -58,7 +58,7 @@ namespace GradingPlatformMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade,IdCourseNavigation,RegistrationNumNavigation")] CourseHasStudent courseHasStudent)
+        public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade")] CourseHasStudent courseHasStudent)
         {
             var idco = from course in _context.Courses
                                                   join chs in _context.CourseHasStudents

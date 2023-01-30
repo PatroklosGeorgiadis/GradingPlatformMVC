@@ -13,13 +13,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 Course ID:
-                <select asp-for="IdCourse" asp-for="IdCourseNavigation" class="form-control" asp-items="ViewBag.IdCourse"></select>
-                <span asp-validation-for="IdCourseNavigation" class="text-danger"></span>
+                <select asp-for="IdCourse" class="form-control" asp-items="ViewBag.IdCourse"></select>
             </div>
             <div class="form-group">
                 Registration Number:
-                <select asp-for="RegistrationNum" asp-for="RegistrationNumNavigation" class ="form-control" asp-items="ViewBag.RegistrationNum"></select>
-                <span asp-validation-for="RegistrationNumNavigation" class="text-danger"></span>
+                <select asp-for="RegistrationNum" class ="form-control" asp-items="ViewBag.RegistrationNum"></select>
             </div>
             <div class="form-group">
                 Grade to be assigned:

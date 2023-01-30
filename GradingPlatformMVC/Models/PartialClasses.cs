@@ -11,7 +11,7 @@ namespace GradingPlatformMVC.Models
     public partial class Course
     {
         [Display(Name = "Professor")]
-        public string? professor { get; }
+        public string? professor { get; set; }
     }
 
 }

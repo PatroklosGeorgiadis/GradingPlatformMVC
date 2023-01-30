@@ -6,14 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GradingPlatformMVC.Models
 {
-    [ModelMetadataType(typeof(StudentMetadata))]
-    public partial class Student
-    {
-    }
 
     [ModelMetadataType(typeof(ProfessorsCoursesMetadata))]
     public partial class Course
     {
+        [Display(Name = "Professor's Afm")]
+        public string? afm { get; set; }
     }
 
 }

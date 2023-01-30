@@ -21,15 +21,15 @@ namespace GradingPlatformMVC.Controllers
         // GET: ProfessorsCourses
         public async Task<IActionResult> Index()
         {
-            var course_info = from course in _context.Courses
+            /*var course_info = from course in _context.Courses
                        join prof in _context.Professors
                        on course.ProfessorsAfm equals prof.Afm
                        select new Course {CourseTitle = course.CourseTitle,
                            CourseSemester = course.CourseSemester,
-                           professor = prof.Surname };
-            /*var gradeDBContext = _context.Courses.OrderBy(c => c.CourseSemester)
-                .Include(c => c.ProfessorsAfmNavigation);*/
-            return View(await course_info.ToListAsync());
+                           professor = prof.Surname };*/
+            var gradeDBContext = _context.Courses.OrderBy(c => c.CourseSemester)
+                .Include(c => c.ProfessorsAfmNavigation);
+            return View(await gradeDBContext.ToListAsync());
         }
 
         // GET: ProfessorsCourses/Details/5

@@ -60,18 +60,6 @@ namespace GradingPlatformMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCourse,RegistrationNum,Grade")] CourseHasStudent courseHasStudent)
         {
-            var idco = from course in _context.Courses
-                                                  join chs in _context.CourseHasStudents
-                                                  on course.IdCourse equals chs.IdCourse
-                                                  where chs.IdCourse == courseHasStudent.IdCourse
-                                                           select course;
-            courseHasStudent.IdCourseNavigation = idco.First();
-            var rnnav = from student in _context.Students
-                                                join chs in _context.CourseHasStudents
-                                                on student.RegistrationNum equals chs.RegistrationNum
-                                                where chs.IdCourse == courseHasStudent.IdCourse
-                                                select student;
-            courseHasStudent.RegistrationNumNavigation = rnnav.First();
             if (ModelState.IsValid)
             {
                 _context.Add(courseHasStudent);

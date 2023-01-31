@@ -13,6 +13,7 @@ namespace GradingPlatformMVC.Controllers
     public class ProfessorsGradesController : Controller
     {
         private readonly GradeDBContext _context;
+        public int currentID;
 
         public ProfessorsGradesController(GradeDBContext context)
         {
@@ -46,9 +47,10 @@ namespace GradingPlatformMVC.Controllers
         }
 
         // GET: ProfessorsGrades/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["IdCourse"] = new SelectList(_context.Courses, "IdCourse", "IdCourse");
+            currentID = id;
+            ViewData["IdCourse"] = id;
             ViewData["RegistrationNum"] = new SelectList(_context.Students, "RegistrationNum", "RegistrationNum");
             return View();
         }
